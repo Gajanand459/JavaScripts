@@ -1,0 +1,389 @@
+/**
+ * 100+ Array + String Problems with Solutions in JavaScript
+ *
+ * Organized by categories: conversions, search, sorting, transformations, advanced challenges.
+ */
+
+// ------------------------------
+// 1. Basic Conversions
+// ------------------------------
+
+// 1. Convert string to array of characters
+const strToArr = str => str.split("");
+
+// 2. Convert array of characters to string
+const arrToStr = arr => arr.join("");
+
+// 3. Split sentence into words array
+const sentenceToWords = str => str.split(" ");
+
+// 4. Join words into sentence
+const wordsToSentence = arr => arr.join(" ");
+
+// 5. Convert CSV string to 2D array
+const csvToArray = str => str.split("\n").map(r => r.split(","));
+
+// 6. Flatten array of string arrays
+const flattenStrArr = arr => arr.flat();
+
+// 7. Merge multiple arrays of strings
+const mergeStrArr = (...arrs) => [].concat(...arrs);
+
+// 8. Convert array of strings to object with counts
+const arrToCountObj = arr => arr.reduce((a, v) => ((a[v] = (a[v]||0)+1), a), {});
+
+// 9. Convert array of characters into chunks
+const chunkString = (str, size) => str.match(new RegExp(`.{1,${size}}`, 'g'));
+
+// 10. Convert array of words into camelCase string
+const arrToCamelCase = arr => arr.map((w,i)=> i? w[0].toUpperCase()+w.slice(1):w.toLowerCase()).join("");
+
+// ------------------------------
+// 2. Search & Filtering
+// ------------------------------
+
+// 11. Find longest string in array
+const longestStr = arr => arr.reduce((a,b) => a.length >= b.length ? a : b);
+
+// 12. Find shortest string in array
+const shortestStr = arr => arr.reduce((a,b) => a.length <= b.length ? a : b);
+
+// 13. Count occurrences of a string in array
+const countStrInArr = (arr, str) => arr.filter(x => x === str).length;
+
+// 14. Remove duplicates
+const removeDupStr = arr => [...new Set(arr)];
+
+// 15. Filter strings starting with prefix
+const filterPrefix = (arr, pre) => arr.filter(s => s.startsWith(pre));
+
+// 16. Filter strings ending with suffix
+const filterSuffix = (arr, suf) => arr.filter(s => s.endsWith(suf));
+
+// 17. Filter strings matching regex
+const filterRegex = (arr, regex) => arr.filter(s => regex.test(s));
+
+// 18. Find index of first matching string
+const findIndexStr = (arr, str) => arr.indexOf(str);
+
+// 19. Find index of last matching string
+const findLastIndexStr = (arr, str) => arr.lastIndexOf(str);
+
+// 20. Check if array contains string
+const arrContainsStr = (arr, str) => arr.includes(str);
+
+// ------------------------------
+// 3. Sorting & Rearranging
+// ------------------------------
+
+// 21. Sort strings alphabetically
+const sortAlpha = arr => [...arr].sort();
+
+// 22. Sort strings in reverse alphabetical order
+const sortAlphaDesc = arr => [...arr].sort().reverse();
+
+// 23. Sort by length (asc)
+const sortByLenAsc = arr => [...arr].sort((a,b) => a.length - b.length);
+
+// 24. Sort by length (desc)
+const sortByLenDesc = arr => [...arr].sort((a,b) => b.length - a.length);
+
+// 25. Group anagrams together
+const groupAnagrams = arr => {
+  const map = {};
+  arr.forEach(w => {
+    const key = w.split('').sort().join('');
+    (map[key] = map[key] || []).push(w);
+  });
+  return Object.values(map);
+};
+
+// 26. Shuffle strings in array
+const shuffleArr = arr => arr.sort(()=> Math.random()-0.5);
+
+// 27. Rotate array of strings by k
+const rotateArr = (arr, k) => arr.slice(-k).concat(arr.slice(0,-k));
+
+// 28. Reverse array of strings
+const reverseArr = arr => [...arr].reverse();
+
+// 29. Reverse characters in each string of array
+const reverseEachStr = arr => arr.map(s => s.split('').reverse().join(''));
+
+// 30. Unique anagram groups count
+const countAnagramGroups = arr => new Set(arr.map(w => w.split('').sort().join(''))).size;
+
+// ------------------------------
+// 4. Transformations
+// ------------------------------
+
+// 31. Uppercase all strings
+const toUpperAll = arr => arr.map(s => s.toUpperCase());
+
+// 32. Lowercase all strings
+const toLowerAll = arr => arr.map(s => s.toLowerCase());
+
+// 33. Capitalize first letter each string
+const capFirstAll = arr => arr.map(s => s.charAt(0).toUpperCase()+s.slice(1));
+
+// 34. Trim spaces inside array
+const trimAll = arr => arr.map(s => s.trim());
+
+// 35. Pad strings left to length 5
+const padLeftAll = arr => arr.map(s => s.padStart(5,'0'));
+
+// 36. Pad strings right to length 5
+const padRightAll = arr => arr.map(s => s.padEnd(5,'*'));
+
+// 37. Replace spaces with dashes in all strings
+const replaceSpacesAll = arr => arr.map(s => s.replace(/\s+/g,'-'));
+
+// 38. Repeat each string twice
+const repeatAll = arr => arr.map(s => s.repeat(2));
+
+// 39. Truncate each string to 3 chars
+const truncateAll = arr => arr.map(s => s.slice(0,3));
+
+// 40. Wrap each string with quotes
+const wrapQuotesAll = arr => arr.map(s => `"${s}"`);
+
+// ------------------------------
+// 5. Advanced Array+String Problems
+// ------------------------------
+
+// 41. Find common strings between two arrays
+const commonStr = (a,b) => a.filter(x => b.includes(x));
+
+// 42. Find difference strings between two arrays
+const diffStr = (a,b) => a.filter(x => !b.includes(x));
+
+// 43. Intersection count
+const intersectionCount = (a,b) => commonStr(a,b).length;
+
+// 44. Union of string arrays
+const unionStrArr = (a,b) => [...new Set([...a,...b])];
+
+// 45. Longest common prefix among array of strings
+const longestCommonPrefix = arr => {
+  if (!arr.length) return '';
+  return arr.reduce((a,b)=>{
+    let i=0; while(i<a.length && i<b.length && a[i]===b[i]) i++;
+    return a.slice(0,i);
+  });
+};
+
+// 46. Longest common suffix
+const longestCommonSuffix = arr => {
+  if (!arr.length) return '';
+  return arr.reduce((a,b)=>{
+    let i=0;
+    while(i<a.length && i<b.length && a[a.length-1-i]===b[b.length-1-i]) i++;
+    return a.slice(a.length-i);
+  });
+};
+
+// 47. Check if all strings are palindromes
+const allPalindrome = arr => arr.every(s => s===s.split('').reverse().join(''));
+
+// 48. Find strings that are anagrams of each other
+const findAnagramPairs = arr => {
+  const map = {};
+  arr.forEach(w => {
+    const key = w.split('').sort().join('');
+    (map[key] = map[key] || []).push(w);
+  });
+  return Object.values(map).filter(g=>g.length>1);
+};
+
+// 49. Encode array of strings to Base64
+const encodeBase64Arr = arr => arr.map(s => btoa(s));
+
+// 50. Decode array of Base64 strings
+const decodeBase64Arr = arr => arr.map(s => atob(s));
+
+// 51. Chunk array of strings into groups of n
+const chunkArr = (arr,n) => Array.from({length: Math.ceil(arr.length/n)}, (_,i)=>arr.slice(i*n,i*n+n));
+
+// 52. Generate all permutations of array of strings
+const permuteArr = arr => {
+  if (arr.length<=1) return [arr];
+  const result=[];
+  for (let i=0;i<arr.length;i++){
+    const rest=permuteArr(arr.slice(0,i).concat(arr.slice(i+1)));
+    rest.forEach(r=> result.push([arr[i],...r]));
+  }
+  return result;
+};
+
+// ------------------------------
+// (Continue up to 100+ problems in full doc)
+// ------------------------------
+/**
+ * 100+ Array + String Problems with Solutions in JavaScript
+ *
+ * Organized by categories: conversions, search, sorting, transformations, advanced challenges.
+ */
+
+// ------------------------------
+// 1. Basic Conversions
+// ------------------------------
+
+const strToArr = str => str.split("");                         // 1
+const arrToStr = arr => arr.join("");                          // 2
+const sentenceToWords = str => str.split(" ");                  // 3
+const wordsToSentence = arr => arr.join(" ");                   // 4
+const csvToArray = str => str.split("\n").map(r => r.split(",")); // 5
+const flattenStrArr = arr => arr.flat();                        // 6
+const mergeStrArr = (...arrs) => [].concat(...arrs);            // 7
+const arrToCountObj = arr => arr.reduce((a, v) => ((a[v] = (a[v]||0)+1), a), {}); // 8
+const chunkString = (str, size) => str.match(new RegExp(`.{1,${size}}`, 'g'));   // 9
+const arrToCamelCase = arr => arr.map((w,i)=> i? w[0].toUpperCase()+w.slice(1):w.toLowerCase()).join(""); // 10
+
+// ------------------------------
+// 2. Search & Filtering
+// ------------------------------
+
+const longestStr = arr => arr.reduce((a,b) => a.length >= b.length ? a : b);     // 11
+const shortestStr = arr => arr.reduce((a,b) => a.length <= b.length ? a : b);    // 12
+const countStrInArr = (arr, str) => arr.filter(x => x === str).length;           // 13
+const removeDupStr = arr => [...new Set(arr)];                                  // 14
+const filterPrefix = (arr, pre) => arr.filter(s => s.startsWith(pre));           // 15
+const filterSuffix = (arr, suf) => arr.filter(s => s.endsWith(suf));             // 16
+const filterRegex = (arr, regex) => arr.filter(s => regex.test(s));              // 17
+const findIndexStr = (arr, str) => arr.indexOf(str);                             // 18
+const findLastIndexStr = (arr, str) => arr.lastIndexOf(str);                     // 19
+const arrContainsStr = (arr, str) => arr.includes(str);                          // 20
+
+// ------------------------------
+// 3. Sorting & Rearranging
+// ------------------------------
+
+const sortAlpha = arr => [...arr].sort();                                       // 21
+const sortAlphaDesc = arr => [...arr].sort().reverse();                         // 22
+const sortByLenAsc = arr => [...arr].sort((a,b) => a.length - b.length);        // 23
+const sortByLenDesc = arr => [...arr].sort((a,b) => b.length - a.length);       // 24
+const groupAnagrams = arr => {                                                 // 25
+  const map = {}; arr.forEach(w => {
+    const key = w.split('').sort().join('');
+    (map[key] = map[key] || []).push(w);
+  }); return Object.values(map);
+};
+const shuffleArr = arr => arr.sort(()=> Math.random()-0.5);                     // 26
+const rotateArr = (arr, k) => arr.slice(-k).concat(arr.slice(0,-k));            // 27
+const reverseArr = arr => [...arr].reverse();                                   // 28
+const reverseEachStr = arr => arr.map(s => s.split('').reverse().join(''));     // 29
+const countAnagramGroups = arr => new Set(arr.map(w => w.split('').sort().join(''))).size; // 30
+
+// ------------------------------
+// 4. Transformations
+// ------------------------------
+
+const toUpperAll = arr => arr.map(s => s.toUpperCase());                        // 31
+const toLowerAll = arr => arr.map(s => s.toLowerCase());                        // 32
+const capFirstAll = arr => arr.map(s => s.charAt(0).toUpperCase()+s.slice(1));  // 33
+const trimAll = arr => arr.map(s => s.trim());                                  // 34
+const padLeftAll = arr => arr.map(s => s.padStart(5,'0'));                      // 35
+const padRightAll = arr => arr.map(s => s.padEnd(5,'*'));                       // 36
+const replaceSpacesAll = arr => arr.map(s => s.replace(/\s+/g,'-'));           // 37
+const repeatAll = arr => arr.map(s => s.repeat(2));                             // 38
+const truncateAll = arr => arr.map(s => s.slice(0,3));                          // 39
+const wrapQuotesAll = arr => arr.map(s => `"${s}"`);                           // 40
+
+// ------------------------------
+// 5. Advanced Array+String Problems
+// ------------------------------
+
+const commonStr = (a,b) => a.filter(x => b.includes(x));                        // 41
+const diffStr = (a,b) => a.filter(x => !b.includes(x));                         // 42
+const intersectionCount = (a,b) => commonStr(a,b).length;                       // 43
+const unionStrArr = (a,b) => [...new Set([...a,...b])];                         // 44
+const longestCommonPrefix = arr => {                                            // 45
+  if (!arr.length) return '';
+  return arr.reduce((a,b)=>{
+    let i=0; while(i<a.length && i<b.length && a[i]===b[i]) i++;
+    return a.slice(0,i);
+  });
+};
+const longestCommonSuffix = arr => {                                            // 46
+  if (!arr.length) return '';
+  return arr.reduce((a,b)=>{
+    let i=0; while(i<a.length && i<b.length && a[a.length-1-i]===b[b.length-1-i]) i++;
+    return a.slice(a.length-i);
+  });
+};
+const allPalindrome = arr => arr.every(s => s===s.split('').reverse().join(''));// 47
+const findAnagramPairs = arr => {                                               // 48
+  const map = {}; arr.forEach(w => {
+    const key = w.split('').sort().join('');
+    (map[key] = map[key] || []).push(w);
+  }); return Object.values(map).filter(g=>g.length>1);
+};
+const encodeBase64Arr = arr => arr.map(s => btoa(s));                           // 49
+const decodeBase64Arr = arr => arr.map(s => atob(s));                           // 50
+const chunkArr = (arr,n) => Array.from({length: Math.ceil(arr.length/n)}, (_,i)=>arr.slice(i*n,i*n+n)); // 51
+const permuteArr = arr => {                                                     // 52
+  if (arr.length<=1) return [arr];
+  const result=[];
+  for (let i=0;i<arr.length;i++){
+    const rest=permuteArr(arr.slice(0,i).concat(arr.slice(i+1)));
+    rest.forEach(r=> result.push([arr[i],...r]));
+  }
+  return result;
+};
+
+// ------------------------------
+// 6. Extra Problems to reach 100+
+// ------------------------------
+
+const flattenWords = arr => arr.flatMap(s=>s.split(' '));                       // 53
+const uniqueWords = arr => [...new Set(flattenWords(arr))];                     // 54
+const freqWords = arr => arrToCountObj(flattenWords(arr));                      // 55
+const removeEmpty = arr => arr.filter(Boolean);                                 // 56
+const sortByLastChar = arr => [...arr].sort((a,b)=> a.slice(-1).localeCompare(b.slice(-1))); // 57
+const sortByVowels = arr => [...arr].sort((a,b)=> (a.match(/[aeiou]/gi)||[]).length - (b.match(/[aeiou]/gi)||[]).length); // 58
+const findMostCommonWord = arr => Object.entries(freqWords(arr)).sort((a,b)=>b[1]-a[1])[0][0]; // 59
+const zipStrings = (a,b) => a.map((s,i)=>s+(b[i]||''));                         // 60
+const interleaveStrArr = (a,b) => [].concat(...a.map((s,i)=>[s,b[i]]).filter(Boolean)); // 61
+const concatUnique = (a,b) => [...new Set([...a,...b])];                        // 62
+const findAllSubstrings = str => {                                             // 63
+  let res=[]; for(let i=0;i<str.length;i++){ for(let j=i+1;j<=str.length;j++){res.push(str.slice(i,j));}} return res;
+};
+const allPairsConcat = arr => {                                                // 64
+  let res=[]; for(let i=0;i<arr.length;i++){ for(let j=i+1;j<arr.length;j++){res.push(arr[i]+arr[j]);}} return res;
+};
+const longestWordAcrossArr = arr => flattenWords(arr).reduce((a,b)=>a.length>=b.length?a:b); // 65
+const shortestWordAcrossArr = arr => flattenWords(arr).reduce((a,b)=>a.length<=b.length?a:b); // 66
+const filterPalindromes = arr => arr.filter(s=>s===s.split('').reverse().join('')); // 67
+const groupByLength = arr => arr.reduce((a,w)=>{(a[w.length]=a[w.length]||[]).push(w); return a;},{}); // 68
+const groupByFirstChar = arr => arr.reduce((a,w)=>{(a[w[0]]=a[w[0]]||[]).push(w); return a;},{}); // 69
+const groupByLastChar = arr => arr.reduce((a,w)=>{(a[w[w.length-1]]=a[w[w.length-1]]||[]).push(w); return a;},{}); // 70
+const toSnakeCaseArr = arr => arr.map(s=>s.toLowerCase().replace(/\s+/g,'_')); // 71
+const toKebabCaseArr = arr => arr.map(s=>s.toLowerCase().replace(/\s+/g,'-')); // 72
+const toPascalCaseArr = arr => arr.map(s=>s.replace(/\w+/g,(w)=>w[0].toUpperCase()+w.slice(1))).join(''); // 73
+const findDuplicates = arr => arr.filter((v,i)=>arr.indexOf(v)!==i);            // 74
+const removeVowelsArr = arr => arr.map(s=>s.replace(/[aeiou]/gi,''));           // 75
+const keepVowelsArr = arr => arr.map(s=>s.replace(/[^aeiou]/gi,''));            // 76
+const reverseWordsInArr = arr => arr.map(s=>s.split(' ').reverse().join(' '));  // 77
+const concatAll = arr => arr.join('');                                         // 78
+const avgWordLength = arr => flattenWords(arr).reduce((a,w)=>a+w.length,0)/flattenWords(arr).length; // 79
+const wordLengthDistribution = arr => flattenWords(arr).reduce((a,w)=>((a[w.length]=(a[w.length]||0)+1),a),{}); // 80
+const sortWordsByFreq = arr => Object.entries(freqWords(arr)).sort((a,b)=>b[1]-a[1]).map(e=>e[0]); // 81
+const getNthCharFromEach = (arr,n) => arr.map(s=>s[n]||'');                     // 82
+const swapFirstLastChar = arr => arr.map(s=>s.length>1? s.slice(-1)+s.slice(1,-1)+s[0]:s); // 83
+const isSubsequence = (str, sub) => {let i=0,j=0;while(i<str.length&&j<sub.length){if(str[i]===sub[j])j++;i++;}return j===sub.length;}; // 84
+const filterBySubsequence = (arr, sub) => arr.filter(s=>isSubsequence(s,sub));  // 85
+const intersperseChar = (arr,char) => arr.join(char);                           // 86
+const rotateCharsInArr = (arr,k) => arr.map(s=>s.slice(-k)+s.slice(0,-k));      // 87
+const toMorseCodeArr = arr => arr.map(s=>s.replace(/[a-z]/gi,c=>c.charCodeAt(0).toString(2))); // 88
+const parseMorseCodeArr = arr => arr.map(b=>String.fromCharCode(parseInt(b,2))); // 89
+const removeNonAlphaArr = arr => arr.map(s=>s.replace(/[^a-z]/gi,''));          // 90
+const keepOnlyNumbersArr = arr => arr.map(s=>s.replace(/[^0-9]/g,''));          // 91
+const extractEmails = arr => arr.flatMap(s=>s.match(/[\w.-]+@[\w.-]+/g)||[]); // 92
+const extractUrls = arr => arr.flatMap(s=>s.match(/https?:\/\/\S+/g)||[]);    // 93
+const censorBadWords = (arr,bads) => arr.map(s=>bads.reduce((t,b)=>t.replace(new RegExp(b,'gi'),'****'),s)); // 94
+const highlightWord = (arr,word) => arr.map(s=>s.replace(new RegExp(word,'gi'),`<b>${word}</b>`)); // 95
+const chunkWordsArr = (arr,n) => chunkArr(flattenWords(arr),n);                 // 96
+const rotateWordsArr = (arr,k) => arr.slice(-k).concat(arr.slice(0,-k));        // 97
+const dedupAndSort = arr => [...new Set(arr)].sort();                           // 98
+const concatWithIndex = arr => arr.map((s,i)=>`${i}:${s}`);                     // 99
+const randomPick = arr => arr[Math.floor(Math.random()*arr.length)];            // 100
